@@ -1,0 +1,16 @@
+{
+  "name": "issoeveganobot",
+  "version": "1.0.0",
+  "description": "Bot do isso é vegano",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Camila Vilarinho",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "request": "^2.79.0"
+  }
+}
