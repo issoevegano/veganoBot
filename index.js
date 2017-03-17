@@ -12,8 +12,8 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 app.listen(5000, () => console.log('Webhook server is listening, port 5000'));
 
-app.get('/webhook/', verificationController);
-app.post('/webhook/', messageWebhookController);
+app.get('/', verificationController);
+app.post('/', messageWebhookController);
 
 
 
