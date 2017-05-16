@@ -1,4 +1,4 @@
-const token = 'EAAFMl1ZBQty4BADi3JCsAHLXsJZBRq3ENIdHvgVAxluuoTPijRqzpfEl8AeOIoNeLM6ZAD2wAXeB3kUFWZBjB0w6OUwmSldPiYa2adO0maiX7Yt4PSZBR0XIe47eqY3ZAQaJdZCR02sqZC4egsjRWxqOMYjssbf2ujsjs1EZBqu5LZBQZDZD';//process.env.FB_PAGE_ACCESS_TOKEN;//'EAAFMl1ZBQty4BAHXbV8pZCqAMcfk8fX14Evd6vmXfrZBs2PHLZBse9aF8YoGzKKRJaTSa2ia5hJsctfQiIZAkqnRJxfXhyli95VK5M7kOWHOaJ1HBG7pXZBniPXmDl6DL532ulZA2FmHXOmJpZAvKgNXVRTChfkfU24WagkRW7uJKgZDZD';
+const token = process.env.FB_PAGE_ACCESS_TOKEN;//'EAAFMl1ZBQty4BAHXbV8pZCqAMcfk8fX14Evd6vmXfrZBs2PHLZBse9aF8YoGzKKRJaTSa2ia5hJsctfQiIZAkqnRJxfXhyli95VK5M7kOWHOaJ1HBG7pXZBniPXmDl6DL532ulZA2FmHXOmJpZAvKgNXVRTChfkfU24WagkRW7uJKgZDZD';
 const CAT_IMAGE_URL = 'https://botcube.co/public/blog/apiai-tutorial-bot/hosico_cat.jpg';
 
 const API_AI_TOKEN = '2418b1ceb39b4edc8b7f1d4a21b62c7c'; //da conta do isso é vegano
