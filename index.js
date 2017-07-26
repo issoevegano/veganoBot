@@ -6,7 +6,7 @@ const app = express()
 
 const verificationController = require('./controllers/verification');
 const messageWebhookController = require('./controllers/messageWebhook');
-const imageSearchController = require('./controllers/imageSearch');
+const apiSearchController = require('./controllers/apiSearch');
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
@@ -20,7 +20,7 @@ app.listen(app.get('port'), function() {
 
 app.get('/', verificationController);
 app.post('/', messageWebhookController);
-app.post('/image-search', imageSearchController);
+app.post('/api-search', apiSearchController);
 
 
 
