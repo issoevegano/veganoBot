@@ -31,6 +31,51 @@ const sendImage = (senderId, imageUri) => {
     });
 };
 
+const sendImage2 = (senderId, imageUri) => {
+    return request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: { access_token: token },
+        method: 'POST',
+        json: {
+            recipient: { id: senderId },
+            message: {
+                attachment: {
+                    type: 'image',
+                    payload: { url: imageUri }
+                }
+            }
+        }
+    });
+};
+
+const sendCard = (senderId, data) => {
+    let dataElements = [];
+    for(let i = 0; i< data.length; i++){
+      dataElements.push({
+        title: data[i].title,
+        subtitle: data[i].subtitle,
+        image_url: data[i].image_url,
+      });
+    }
+    console.log("Data: " + dataElements);
+    return request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: { access_token: token },
+        method: 'POST',
+        json: {
+            recipient: { id: senderId },
+            message: {
+              attachment: {
+                type: "template",
+                payload: {
+                  template_type: "generic",
+                  elements: dataElements
+                }
+              }
+            }
+        }
+    });
+};
 
 module.exports = (event) => {
     const senderId = event.sender.id;
@@ -40,10 +85,11 @@ module.exports = (event) => {
 
     apiaiSession.on('response', (response) => {
         const result = response.result.fulfillment.messages[0].speech; // fulfillment.speech
+        const data = response.result.fulfillment.data;
 
         if (response.result.metadata.intentName === 'products.search') {
-            if(result !== ""){
-              sendImage(senderId, result);
+            if(data.length > 0){
+              sendCard(senderId, data);
             } else sendTextMessage(senderId, result);
         } else {
             sendTextMessage(senderId, result);

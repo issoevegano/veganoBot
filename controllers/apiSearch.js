@@ -11,15 +11,22 @@ module.exports = (req, res) => {
           if (!err && response.statusCode == 200) {
             const json = JSON.parse(body).results;
             var products = [];
+            var names = [];
             for(var i = 0; i < json.length; i++){
-              products.push(json[i].name);
+              names.push(json[i].name);
+              products.push({
+                title: json[i].name,
+                image_url: json[i].image,
+                subtitle: json[i].note
+              });
             }
             //var products = json[1].image;
-            productUri = products.toString();
-            console.log("Resultado:" + json);
+            productsName = names.toString();
+            console.log("Resultado:" + productsName);
             return res.json({
-              speech: productUri,
-              displayText: productUri,
+              speech: productsName,
+              displayText: productsName,
+              data: products,
               source: 'product_name'
             });
           } else{
