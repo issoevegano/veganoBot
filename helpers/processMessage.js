@@ -77,25 +77,68 @@ const sendCard = (senderId, data) => {
     });
 };
 
+/*const getUserProfile = (senderId) =>{
+  const profileAPI = "https://graph.facebook.com/v2.6/"+ senderId +"?fields=first_name&access_token="+ token
+  request.get(profileAPI)
+    .on('data', function(data) {
+      const json = JSON.parse(data);
+      //return json.first_name;
+      console.log("Data from get: " + json.first_name) // 200
+    })
+}*/
+
+function getUserProfile(userId) {
+    return new Promise((resolve, reject) => {
+        request({
+                method: 'GET',
+                uri: "https://graph.facebook.com/v2.6/" + userId + "?fields=first_name&access_token=" + token
+            },
+            function (error, response) {
+                if (error) {
+                    //console.error('Error while getUserProfile: ', error);
+                    reject(error);
+                } else {
+                    //console.log('getUserProfile result: ', response.body);
+                    resolve(response.body);
+                }
+            });
+    });
+}
+
 module.exports = (event) => {
     const senderId = event.sender.id;
     const message = event.message.text;
 
-    const apiaiSession = apiAiClient.textRequest(message, {sessionId: 'issoevegano_bot'});
+    getUserProfile(senderId)
+      .then((userInfo) => {
+        const json = JSON.parse(userInfo);
+        console.log("Nome do user: " + json.first_name);
+        let apiaiSession = apiAiClient.textRequest(message, {
+          sessionId: 'issoevegano_bot',
+          contexts: [{
+            name: "generic",
+            parameters: {
+              facebook_user: json.first_name
+            }
+          }]
+        });
 
-    apiaiSession.on('response', (response) => {
-        const result = response.result.fulfillment.messages[0].speech; // fulfillment.speech
-        const data = response.result.fulfillment.data;
+        apiaiSession.on('response', (response) => {
+            const result = response.result.fulfillment.messages[0].speech; // fulfillment.speech
+            const data = response.result.fulfillment.data;
 
-        if (response.result.metadata.intentName === 'products.search') {
-            if(data.length > 0){
-              sendCard(senderId, data);
-            } else sendTextMessage(senderId, result);
-        } else {
-            sendTextMessage(senderId, result);
-        }
-    });
+            if (response.result.metadata.intentName === 'products.search') {
+                if(data.length > 0){
+                  sendCard(senderId, data);
+                } else sendTextMessage(senderId, result);
+            } else {
+                sendTextMessage(senderId, result);
+            }
+        });
 
-    apiaiSession.on('error', error => console.log(error));
-    apiaiSession.end();
+        apiaiSession.on('error', error => console.log(error));
+        apiaiSession.end();
+      }).catch(err=> {
+        console.error(err);
+      });
 };

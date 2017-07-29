@@ -1,5 +1,3 @@
-//const GETTY_IMAGES_API_KEY = 'tap64ab6jcwfwh8zu3deaj98';
-
 const request = require('request');
 
 module.exports = (req, res) => {
