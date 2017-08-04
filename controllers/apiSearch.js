@@ -36,7 +36,7 @@ module.exports = (req, res) => {
         })
     } else if(req.body.result.action === 'brand'){
       const brandName = req.body.result.parameters['brand_name'];
-      const apiUrl = 'http://127.0.0.1:8000/products/?search=' + brandName;
+      const apiUrl = 'https://issoevegano-api.herokuapp.com/products/?search=' + brandName;
 
       request.get(apiUrl, (err, response, body) => {
         if (!err && response.statusCode == 200) {
