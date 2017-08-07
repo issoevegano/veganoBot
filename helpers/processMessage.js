@@ -1,6 +1,4 @@
 const token = 'EAAFMl1ZBQty4BAHXbV8pZCqAMcfk8fX14Evd6vmXfrZBs2PHLZBse9aF8YoGzKKRJaTSa2ia5hJsctfQiIZAkqnRJxfXhyli95VK5M7kOWHOaJ1HBG7pXZBniPXmDl6DL532ulZA2FmHXOmJpZAvKgNXVRTChfkfU24WagkRW7uJKgZDZD';//process.env.FB_PAGE_ACCESS_TOKEN;//
-//const CAT_IMAGE_URL = 'https://botcube.co/public/blog/apiai-tutorial-bot/hosico_cat.jpg';
-
 const API_AI_TOKEN = '2418b1ceb39b4edc8b7f1d4a21b62c7c'; //da conta do isso é vegano
 const apiAiClient = require('apiai')(API_AI_TOKEN);
 
@@ -15,35 +13,6 @@ const sendTextMessage = (senderId, text) => {
         json: {
             recipient: { id: senderId },
             message: { text },
-        }
-    });
-};
-
-const sendImage = (senderId, imageUri) => {
-    return request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: { access_token: token },
-        method: 'POST',
-        json: {
-            recipient: { id: senderId },
-            message: { text: imageUri }
-        }
-    });
-};
-
-const sendImage2 = (senderId, imageUri) => {
-    return request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: { access_token: token },
-        method: 'POST',
-        json: {
-            recipient: { id: senderId },
-            message: {
-                attachment: {
-                    type: 'image',
-                    payload: { url: imageUri }
-                }
-            }
         }
     });
 };
@@ -76,16 +45,6 @@ const sendCard = (senderId, data) => {
         }
     });
 };
-
-/*const getUserProfile = (senderId) =>{
-  const profileAPI = "https://graph.facebook.com/v2.6/"+ senderId +"?fields=first_name&access_token="+ token
-  request.get(profileAPI)
-    .on('data', function(data) {
-      const json = JSON.parse(data);
-      //return json.first_name;
-      console.log("Data from get: " + json.first_name) // 200
-    })
-}*/
 
 function getUserProfile(userId) {
     return new Promise((resolve, reject) => {
