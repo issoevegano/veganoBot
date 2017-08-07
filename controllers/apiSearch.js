@@ -42,15 +42,15 @@ module.exports = (req, res) => {
         if (!err && response.statusCode == 200) {
           const json = JSON.parse(body).results;
 
-          var products = [];
+          /*var products = [];
           for(var i = 0; i < json.length; i++){
             products.push(json[i].name);
-          }
+          }*/
 
           let brandIsVegan = "";
-          if(products[0] == undefined){
+          if(json[0].name == undefined){
             brandIsVegan = "";
-          } else brandIsVegan = "Sim, é vegano";
+          } else brandIsVegan = "Sim, "+ json[0].note;
           //var products = json[1].image;
           //productUri = products.toString();
           console.log("Resultado:" + brandIsVegan);
