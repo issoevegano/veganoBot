@@ -1,4 +1,4 @@
-const token = 'EAAFMl1ZBQty4BAHXbV8pZCqAMcfk8fX14Evd6vmXfrZBs2PHLZBse9aF8YoGzKKRJaTSa2ia5hJsctfQiIZAkqnRJxfXhyli95VK5M7kOWHOaJ1HBG7pXZBniPXmDl6DL532ulZA2FmHXOmJpZAvKgNXVRTChfkfU24WagkRW7uJKgZDZD';//process.env.FB_PAGE_ACCESS_TOKEN;//
+const token = process.env.FB_PAGE_ACCESS_TOKEN;
 const API_AI_TOKEN = '2418b1ceb39b4edc8b7f1d4a21b62c7c'; //da conta do isso é vegano
 const apiAiClient = require('apiai')(API_AI_TOKEN);
 
