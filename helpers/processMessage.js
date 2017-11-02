@@ -71,7 +71,7 @@ module.exports = (event) => {
     getUserProfile(senderId)
       .then((userInfo) => {
         const json = JSON.parse(userInfo);
-        console.log("Nome do user: " + json.first_name);
+        //console.log("Nome do user: " + json.first_name);
         let apiaiSession = apiAiClient.textRequest(message, {
           sessionId: 'issoevegano_bot',
           contexts: [{
@@ -85,7 +85,7 @@ module.exports = (event) => {
         apiaiSession.on('response', (response) => {
             const result = response.result.fulfillment.messages[0].speech; // fulfillment.speech
             const data = response.result.fulfillment.data;
-
+            console.log("Resultado de Data: "+ data);
             if (response.result.metadata.intentName === 'products.search') {
                 if(data.length > 0){
                   sendCard(senderId, data);
