@@ -87,7 +87,7 @@ module.exports = (event) => {
             const data = response.result.fulfillment.data;
             console.log("Resultado de Data: "+ data);
             if (response.result.metadata.intentName === 'products.search') {
-                if(data.length > 0){
+                if(data != undefined){
                   sendCard(senderId, data);
                 } else sendTextMessage(senderId, result);
             } else {
